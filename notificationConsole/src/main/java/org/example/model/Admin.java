@@ -1,8 +1,9 @@
 package org.example.model;
 
+import org.example.Interface.Message;
 import org.example.service.AdminService;
 
-public class Admin extends AdminService {
+public class Admin extends AdminService implements Message {
     String email;
     String password;
 
@@ -24,6 +25,16 @@ public class Admin extends AdminService {
     }
     // methode afficher notificationRecus
     public void afficherNotificationRecus(){
+
+    }
+    // Les methodes de l'interface message;
+    //Methode pour envoyer une notification console
+    @Override
+    public void envoyerNotification(String objet, String contenu){
+
+    }
+    @Override
+    public void envoyerEmail(String objet, String contenu){
 
     }
 }
