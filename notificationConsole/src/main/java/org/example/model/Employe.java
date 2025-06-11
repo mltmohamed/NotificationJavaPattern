@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.io.IOException;
+
 public class Employe {
     String prenom;
     String nom;
@@ -7,7 +9,7 @@ public class Employe {
     String password;
     boolean estAbonne = false;
     // les getters
-
+    public Employe(){}
     public Employe(String prenom, String nom, String email, String password){
         this.prenom = prenom;
         this.nom = nom;
@@ -29,7 +31,7 @@ public class Employe {
     public void setEstAbonne(boolean estAbonne) {this.estAbonne = estAbonne;}
 
     //Methode pour s'abonner à un service de notification
-    public void AbonnerServiceNotification(){
+    public void AbonnerServiceNotification() throws IOException {
 
     }
 }

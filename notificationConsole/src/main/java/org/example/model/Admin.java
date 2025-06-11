@@ -6,7 +6,11 @@ import org.example.service.AdminService;
 public class Admin extends AdminService implements Message {
     String email;
     String password;
-
+    //constructeur admin
+    public Admin(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
     // les getters email password
     public String getEmail() {return email;}
     public String getPassword() {return password;}
@@ -27,6 +31,7 @@ public class Admin extends AdminService implements Message {
     public void afficherNotificationRecus(){
 
     }
+
     // Les methodes de l'interface message;
     //Methode pour envoyer une notification console
     @Override

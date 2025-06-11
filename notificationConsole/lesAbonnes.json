@@ -1,0 +1,17 @@
+{
+  "abonnes" : [ {
+    "prenom" : "Amadou",
+    "nom" : "Diallo",
+    "email" : "dialloamadou@gmail.com",
+    "password" : "diallo",
+    "estAbonne" : true,
+    "mesNotifications" : [ ]
+  }, {
+    "prenom" : "Amadou",
+    "nom" : "Traore",
+    "email" : "adamou@gmail.com",
+    "password" : "amadou",
+    "estAbonne" : true,
+    "mesNotifications" : [ ]
+  } ]
+}

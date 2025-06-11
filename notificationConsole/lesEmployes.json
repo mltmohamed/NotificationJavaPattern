@@ -1,0 +1,27 @@
+{
+  "lesEmployes" : [ {
+    "prenom" : "Mohamed",
+    "nom" : "Traore",
+    "email" : "traoremohamed7212@gmail.com",
+    "password" : "midajuha",
+    "estAbonne" : false
+  }, {
+    "prenom" : "Amadou",
+    "nom" : "Diallo",
+    "email" : "dialloamadou@gmail.com",
+    "password" : "diallo",
+    "estAbonne" : false
+  }, {
+    "prenom" : "Madou",
+    "nom" : "traore",
+    "email" : "mad@gmail.com",
+    "password" : "madouu",
+    "estAbonne" : false
+  }, {
+    "prenom" : "Amadou",
+    "nom" : "Traore",
+    "email" : "adamou@gmail.com",
+    "password" : "amadou",
+    "estAbonne" : false
+  } ]
+}
