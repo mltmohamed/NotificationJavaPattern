@@ -2,6 +2,7 @@ package org.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.listeDesModels.ListeAbonnes;
+import org.example.listeDesModels.ListeEmployes;
 import org.example.model.Abonne;
 import org.example.model.Admin;
 import org.example.model.Employe;
@@ -28,6 +29,7 @@ public class Main {
                 System.out.println("1.ADMIN       2.ABONNE     3.EMPLOYE      4.Quitter");
                 System.out.print("votre choix :  ");
                 choixUser = scanner.nextInt();
+                // Se connecter comme ADMIN
                 if(choixUser == 1){
                     Scanner scaner1 = new Scanner(System.in);
                     Admin admin = new Admin("admin@gmail.com", "admin");
@@ -43,7 +45,7 @@ public class Main {
                                 System.out.println("=================================================");
                                 System.out.println("Que voulez vous faire ? ");
                                 System.out.println("                                       ");
-                                System.out.println("1.Ajouter Un Employé \n2.Ajouter un abonné  \n3.Retirer un abonné \n4.Afficher la liste des abonnés \n5.S'abonner à un service de Notification \n6. Se desabonner d'un service de Notification \n7. Affciher ses notifications reçues \n8.Envoyer un message \n9.Se Deconnecter");
+                                System.out.println("1.Ajouter Un Employé \n2.Ajouter un abonné  \n3.Retirer un abonné \n4.Afficher la liste des abonnés \n5.Se Deconnecter");
                                 System.out.print("votre choix :  ");
                                 Scanner scanner2 = new Scanner(System.in);
                                 choixAdmin = scanner2.nextInt();
@@ -63,26 +65,15 @@ public class Main {
                                 // afficher la liste des abonnés
                                     admin.afficherListeAbonner();
                                 }
-                                else if (choixAdmin == 5) {
 
-                                // s'abonner à un service de notification
-                                }
-                                else if (choixAdmin ==6) {
-                                // Se desabonner d'un service de notification
-                                }
-                                else if (choixAdmin ==7) {
-                                // afficher ses notifications reçues
-                                }
-                                else if (choixAdmin == 8) {
-                                    // envoyer les messages
-                                } else if (choixAdmin ==9) {
+                              else if (choixAdmin ==5) {
                                 // se deconnecter
                                 System.out.println("Deconnexion reussi Admin !");
                                 }
                                 else {
                                 System.out.println("Votre choix est indisponible");
                                 }
-                            }while (choixAdmin !=9);
+                            }while (choixAdmin !=5);
                         }
                         else{
                             System.out.println("Email ou mot de passe incorrect !");
@@ -92,16 +83,17 @@ public class Main {
                 // Se connecter comme un Abonne
                 else if (choixUser ==2) {
                     ObjectMapper mapper = new ObjectMapper();
+                    Scanner scanner4 = new Scanner(System.in);
                     File fichier = new File("lesAbonnes.json");
                     System.out.println("Entrer votre email : ");
-                    String emails = scanner.nextLine();
+                    String emails = scanner4.nextLine();
                     System.out.println("Entrer votre mot de passe :");
-                    String passes = scanner.nextLine();
+                    String passes = scanner4.nextLine();
                     ListeAbonnes listesAbonnes = mapper.readValue(fichier, ListeAbonnes.class);
+                    boolean resultat = false;
                     if(fichier.exists() && fichier.length() > 0){
                         int choixAbonne = 0;
                         do{
-                        boolean resultat = false;
                         for(Abonne abonne : listesAbonnes.getAbonnes()){
                             if(abonne.getEmail().equals(emails) && abonne.getPassword().equals(passes)) {
 
@@ -110,7 +102,7 @@ public class Main {
                                 System.out.println("===================================================");
                                 System.out.println("Que voulez vous faire ? ");
                                 System.out.println("                                       ");
-                                System.out.println("\n1.Se desabonner d'un Service de notification \n2.Afficher sa liste de notification \n3.Envoyer un message  \n3.Se deconnecter");
+                                System.out.println("\n1.Se desabonner d'un Service de notification \n2.Afficher sa liste de notification \n3.Envoyer un message  \n4.Se deconnecter");
                                 System.out.print("votre choix :  ");
                                 Scanner scanner3 = new Scanner(System.in);
                                 choixAbonne = scanner3.nextInt();
@@ -133,17 +125,66 @@ public class Main {
 
                             }
                         }
-                        if (!resultat){
-                            System.out.println("Email ou mot de passe incorrect !");
-                        }
+                            if (!resultat){
+                                System.out.println("Email ou mot de passe incorrect !");
+                                break;
+                            }
+
                         }while (choixAbonne!=4);
+
                     }
                     else {
                         System.out.println("Le fichier n'existe pas");
                     }
                 }
+                //Se connecter comme Employé
                 else if (choixUser ==3) {
-                    System.out.println("Deconnexion reussi !");
+                    ObjectMapper mapper = new ObjectMapper();
+                    Scanner scanner4 = new Scanner(System.in);
+                    File fichier = new File("lesEmployes.json");
+                    System.out.println("Entrer votre email : ");
+                    String emails = scanner4.nextLine();
+                    System.out.println("Entrer votre mot de passe :");
+                    String passes = scanner4.nextLine();
+                    ListeEmployes listesEmployes = mapper.readValue(fichier, ListeEmployes.class);
+                    boolean resultat = false;
+                    if(fichier.exists() && fichier.length() > 0){
+                        int choixEmploye = 0;
+                        do{
+                            for(Employe employe : listesEmployes.getLesEmployes()){
+                                if(employe.getEmail().equals(emails) && employe.getPassword().equals(passes)) {
+
+                                    resultat = true;
+                                    System.out.println("            B I E N V E N U  L'E M P L O Y E         ");
+                                    System.out.println("=====================================================");
+                                    System.out.println("Que voulez vous faire ? ");
+                                    System.out.println("                                       ");
+                                    System.out.println("\n1.S'abonner à un Service de notification \n2.Se deconnecter");
+                                    System.out.print("votre choix :  ");
+                                    Scanner scanner3 = new Scanner(System.in);
+                                    choixEmploye = scanner3.nextInt();
+                                    if (choixEmploye == 1) {
+                                        // S'abonner à un service de notification
+                                      employe.AbonnerServiceNotification();
+
+                                    } else if (choixEmploye== 2) {
+                                        //Deconnexion
+                                        System.out.println("Deconnexion reussi avec succès L'employé!");
+                                    }
+
+                                }
+                            }
+                            if (!resultat){
+                                System.out.println("Email ou mot de passe incorrect !");
+                                break;
+                            }
+
+                        }while (choixEmploye!=2);
+
+                    }
+                    else {
+                        System.out.println("Le fichier n'existe pas");
+                    }
                 }
                 else {
                     System.out.println("Choix non disponible");

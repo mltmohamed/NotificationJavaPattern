@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Abonne extends Employe implements Message {
@@ -39,7 +40,7 @@ public class Abonne extends Employe implements Message {
             notification.getListeNotification().addAll(this.getMesNotifications());
             for(Notification notif : notification.getListeNotification()){
                 System.out.println("Voici vos notifications : ");
-                System.out.println("Objet : " + notif.getObjet() + "Contenu : "+ notif.getContenu());
+                System.out.println("Objet : " + notif.getObjet() + " Contenu : "+ notif.getContenu());
             }
         }
 
@@ -50,9 +51,12 @@ public class Abonne extends Employe implements Message {
         File fichier = new File("lesAbonnes.json");
         ObjectMapper mapper = new ObjectMapper();
         ListeAbonnes listesAbonnes = mapper.readValue(fichier, ListeAbonnes.class);
-        listesAbonnes.getAbonnes().remove(this);
+       Abonne abonne = new Abonne(this.getPrenom(),this.getNom(), this.getEmail(),this.getPassword());
+        listesAbonnes.getAbonnes().remove(abonne);
+        System.out.println(listesAbonnes.getAbonnes().size());
         mapper.writerWithDefaultPrettyPrinter().writeValue(fichier,listesAbonnes);
-        System.out.println("Vous avez deconnectez avec succès " + this.prenom + " "+ this.nom);
+        System.out.println("Vous êtes desabonner avec succès " + this.prenom + " "+ this.nom);
+        System.out.println(listesAbonnes.getAbonnes().size());
     }
     @Override
     public void envoyerNotification(String objet, String contenu) throws IOException{
@@ -79,5 +83,22 @@ public class Abonne extends Employe implements Message {
     @Override
     public void envoyerEmail(String objet, String contenu){
 
+    }
+
+    // Aide de chatGPT ou reecrire la methode equals et hascode me permettant de supprimer de l'objet dans le json
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Abonne abonne = (Abonne) o;
+        return Objects.equals(prenom, abonne.prenom) &&
+                Objects.equals(nom, abonne.nom) &&
+                Objects.equals(email, abonne.email);
+        // je peux aussi inclure le mot de passe si nécessaire
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prenom, nom, email); // et password si je l’inclus dans equals
     }
 }

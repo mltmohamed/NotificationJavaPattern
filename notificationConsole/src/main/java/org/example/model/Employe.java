@@ -1,5 +1,9 @@
 package org.example.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.listeDesModels.ListeAbonnes;
+
+import java.io.File;
 import java.io.IOException;
 
 public class Employe {
@@ -32,6 +36,29 @@ public class Employe {
 
     //Methode pour s'abonner à un service de notification
     public void AbonnerServiceNotification() throws IOException {
+
+        File fichier = new File("lesAbonnes.json");
+        File fichierEmploye = new File("lesEmployes.json");
+        ObjectMapper mapper = new ObjectMapper();
+        ListeAbonnes listesAbonnes = mapper.readValue(fichier, ListeAbonnes.class);
+        Abonne abonne = new Abonne(this.prenom, this.nom, this.email, this.password);
+        abonne.setEstAbonne(true);
+        boolean resulat = false;
+        for(Abonne abone : listesAbonnes.getAbonnes()){
+            if(abone.getEmail().equals(this.email)){
+                System.out.println("Vous êtes dejà abonné à un service de notification");
+                resulat = true;
+            }
+        }
+        if(!resulat){
+            listesAbonnes.getAbonnes().add(abonne);
+            abonne.setEstAbonne(true);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(fichier,listesAbonnes);
+            System.out.println("Vous vous êtes abonné avec succès " + this.prenom + " "+ this.nom);
+        }
+
+
+
 
     }
 }

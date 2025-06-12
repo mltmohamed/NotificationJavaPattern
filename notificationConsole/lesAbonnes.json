@@ -5,12 +5,31 @@
     "email" : "dialloamadou@gmail.com",
     "password" : "diallo",
     "estAbonne" : true,
-    "mesNotifications" : [ ]
+    "mesNotifications" : [ {
+      "objet" : "message",
+      "contenu" : "contenu"
+    }, {
+      "objet" : "message",
+      "contenu" : "tout le monde"
+    }, {
+      "objet" : "bjr",
+      "contenu" : "bonjour"
+    } ]
   }, {
     "prenom" : "Amadou",
     "nom" : "Traore",
     "email" : "adamou@gmail.com",
     "password" : "amadou",
+    "estAbonne" : true,
+    "mesNotifications" : [ {
+      "objet" : "message",
+      "contenu" : "merci"
+    } ]
+  }, {
+    "prenom" : "Mohamed",
+    "nom" : "Coulibaly",
+    "email" : "coulibaly@gmail.com",
+    "password" : "coulibaly",
     "estAbonne" : true,
     "mesNotifications" : [ ]
   } ]
